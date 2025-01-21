@@ -39,7 +39,7 @@ contract toadLottery is VRFConsumerBaseV2Plus, ReentrancyGuard {
     bool public prizesDistributed;
 
     // Constants
-    uint256 public constant MAXIMUM_PLAYERS = 4;
+    uint256 public constant MAXIMUM_PLAYERS = 10;
     uint256 public constant ENTRY_FEE = 0.001 ether;
     uint256 public constant FINAL_PRIZE_POOL = ENTRY_FEE * MAXIMUM_PLAYERS;
 
@@ -74,6 +74,7 @@ contract toadLottery is VRFConsumerBaseV2Plus, ReentrancyGuard {
     ) VRFConsumerBaseV2Plus(0xDA3b641D438362C440Ac5458c57e00a712b66700) {
         require(_devAddress != address(0), "Invalid dev address");
 
+     //Addresses which contributed on funding
         fundingAddresses = [
             payable(0xcD71336769347f8A2B5db79d2606Bef6bf36Ee93),
             payable(0xadC5d469f631333BC3aF98776614aC9bEBD3FAf9)
@@ -189,8 +190,8 @@ contract toadLottery is VRFConsumerBaseV2Plus, ReentrancyGuard {
 
         uint256 winnersShare = (FINAL_PRIZE_POOL * 60) / 100;
         uint256 singleWinnerShare = winnersShare / 3;
-        uint256 devShare = (FINAL_PRIZE_POOL * 10) / 100;
-        uint256 fundingSharePerAddress = (FINAL_PRIZE_POOL * 10) / 100;
+        uint256 devShare = (FINAL_PRIZE_POOL * 8) / 100;
+        uint256 fundingSharePerAddress = (FINAL_PRIZE_POOL * 12) / 100;
 
         for (uint256 i = 0; i < 3; i++) {
             pendingWithdrawals[recentWinners[i]] += singleWinnerShare;
